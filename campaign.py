@@ -11,6 +11,7 @@ class Campaign():
         doc["followers"] = followers
         doc["started"] = started
         doc["message"] = message
+        user_id = int(user_id)
         doc["user_id"] = user_id
         elem = self.collection.find({}, {"name": name})
         x = self.collection.insert_one(doc)

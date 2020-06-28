@@ -136,9 +136,15 @@ def create_campaign():
     authConfig = AuthConfig()
     authConfig.set_chakra(auth)
     chakraInstance = authConfig.get_chakra()
-    # chakraInstance = authConfig.get_chakra()
-    # followers = chakraInstance.get_ranks_from_retweets(id)
-    followers = []
+    chakraInstance = authConfig.get_chakra()
+    if strategy == 'tweet':
+        followers = chakraInstance.get_ranks_from_retweets(id)
+    elif strategy == 'friend':
+        followers = chakraInstance.get_ranks_from_follower_friends(user_id)
+    elif strategy == 'follower':
+        followers = chakraInstance.get_ranks_from_follower_followers(user_id)
+    else:
+        followers = []
     started = True
     message = req['message']
     campaign.create_new_campaign(id, name, strategy, followers, started, message, user_id)
